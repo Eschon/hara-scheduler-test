@@ -2,10 +2,10 @@
   (:require [hara.io.scheduler :refer [scheduler start!]])
   (:gen-class))
 
+(def sch  (scheduler {:hello {:handler  (fn [t params] (println t))
+                                  :schedule "/2 * * * * * *"
+                                  :params {}}}
+                         {}
+                         {:clock {:type "java.time.Instant"}}))
 (defn -main []
-  (let [sch2 (scheduler {:hello {:handler  (fn [t params] (println t))
-                                :schedule "/2 * * * * * *"
-                                :params {}}}
-                       {}
-                       {:clock {:type "java.time.Instant"}})]
-    (start! sch2)))
+  (start! sch))
